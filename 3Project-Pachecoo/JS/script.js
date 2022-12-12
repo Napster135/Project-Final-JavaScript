@@ -1,52 +1,53 @@
 let carrito = [];
 let carro = document.getElementById("carrito");
 let divAnimal = document.getElementById("divProductos");
- let selectNft = document.getElementById('select-nft')
- let botonSelect = document.getElementById('select-button')
- let botonVaciar = document.getElementById("vaciar-carrito")
- let divTotal = document.getElementById('total-carrito')
+let botonVaciar = document.getElementById("vaciar-carrito");
+let divTotal = document.getElementById("total-carrito");
 let contenedorTarjetas = document.querySelector(".contenedorTarjetas");
-let pruebas = document.querySelector(".pruebas");
-let btnAgregarCarrito =  document.getElementById('boton');
+let btnAgregarCarrito = document.getElementById("boton");
+divTotal.textContent = `Total: 0`;
 
- divTotal.textContent = `Total: 0`
-
-const usuarios = [  
+const usuarios = [
   {
-    nombre: 'Franco',
-    mail: 'francorobles@gmail.com',
-    pass: 'Qwerty123'
+    nombre: "Franco",
+    mail: "francorobles@gmail.com",
+    pass: "Qwerty123",
   },
   {
-    nombre: 'Luciana',
-    mail: 'lucianadelmar@gmail.com',
-    pass: 'lu'
+    nombre: "Luciana",
+    mail: "lucianadelmar@gmail.com",
+    pass: "lu",
   },
   {
-    nombre: 'Leandro',
-    mail: 'ellean2020@gmail.com',
-    pass: 'aguanteleandro'
-  }]
+    nombre: "Leandro",
+    mail: "ellean2020@gmail.com",
+    pass: "aguanteleandro",
+  },
+];
 
-const mascotas = [{
+const mascotas = [
+  {
     nombre: "Royal Cannin",
     especie: "Gatos",
-    edad: 1-5,
+    edad: 1 - 5,
     peso: 3,
-    img: './Img/royal gatos.png'
-}, {
+    img: "./Img/royal gatos.png",
+  },
+  {
     nombre: "Royal Canin ",
     especie: "Perros ",
     edad: 1,
     peso: 3,
-    img: './Img/perros.png'
-}, {
+    img: "./Img/perros.png",
+  },
+  {
     nombre: "royal Adulto",
     especie: "Gatos",
-    edad: 5 ,
+    edad: 5,
     peso: 10,
-    img: './Img/royal adulto.png'
-}]
+    img: "./Img/royal adulto.png",
+  },
+];
 
 const catalogo = [
   {
@@ -203,138 +204,122 @@ const catalogo = [
     descripcion:
       "El elegante gato nebelung destaca por su complexión musculosa pero grácil. Pesa entre cuatro y siete kilos, los machos tienden a ser más pesados. Esto hace que pertenezca a los gatos de tamaño mediano. Las piernas medianamente fuertes son largas y las patas son ovaladas. La cabeza es cuneiforme y las orejas son grandes y un poco puntiagudas.",
   },
-]
-  
+];
 
-const 
-    mailLogin = document.getElementById('emailLogin'),
-    passLogin = document.getElementById('passwordLogin'),
-    recordar = document.getElementById('recordarme'),
-    btnLogin = document.getElementById('login'),
-    modalEl = document.getElementById('modalLogin'),   
-    modal = new bootstrap.Modal(modalEl),
-    contTarjetas = document.getElementById('tarjetas'),
-    toggles = document.querySelectorAll('.toggles');
+const mailLogin = document.getElementById("emailLogin"),
+  passLogin = document.getElementById("passwordLogin"),
+  recordar = document.getElementById("recordarme"),
+  btnLogin = document.getElementById("login"),
+  modalEl = document.getElementById("modalLogin"),
+  modal = new bootstrap.Modal(modalEl),
+  contTarjetas = document.getElementById("tarjetas"),
+  toggles = document.querySelectorAll(".toggles");
 
+function validarUsuario(usersDB, user, pass) {
+  let encontrado = usersDB.find((userDB) => userDB.mail == user);
 
-
-  function validarUsuario(usersDB, user, pass) {
-  
-    let encontrado = usersDB.find((userDB) => userDB.mail == user);
-
-    if (typeof encontrado === 'undefined') {
-        return false;
+  if (typeof encontrado === "undefined") {
+    return false;
+  } else {
+    if (encontrado.pass != pass) {
+      return false;
     } else {
-       
-        if (encontrado.pass != pass) {
-            return false;
-        } else {
-            return encontrado;
-        }
+      return encontrado;
     }
-}
-
-function guardarDatos(usuarioDB,storage){
-    const usuario  = {
-        'name' : usuarioDB.nombre,
-        'user': usuarioDB.mail,
-        'pass': usuarioDB.pass
-    }
-
-    storage.setItem('usuario', JSON.stringify(usuario));
-}
-
-function saludar(usuario){
-  nombreUsuario.innerHTML =   `Bienvenido/a, <span>${usuario.name}</span>`
-
-}
- 
-function borradoDatos(){
-     localStorage.clear();
-     sessionStorage.clear();
-}
-
-
-function recuperoUsuario(storage){
-  let usuarioEnStorage = JSON.parse(storage.getItem('usuario'));
-  return usuarioEnStorage;
-
-}
-
-function estaLogueado(usuario){
-  if(usuario){
-      saludar(usuario);
-      mostrarInfoMascota(mascotas);
-      presentarInfo(toggles, 'd-none');
   }
 }
 
+function guardarDatos(usuarioDB, storage) {
+  const usuario = {
+    name: usuarioDB.nombre,
+    user: usuarioDB.mail,
+    pass: usuarioDB.pass,
+  };
+
+  storage.setItem("usuario", JSON.stringify(usuario));
+}
+
+function saludar(usuario) {
+  nombreUsuario.innerHTML = `Bienvenido/a, <span>${usuario.name}</span>`;
+}
+
+function borradoDatos() {
+  localStorage.clear();
+  sessionStorage.clear();
+}
+
+function recuperoUsuario(storage) {
+  let usuarioEnStorage = JSON.parse(storage.getItem("usuario"));
+  return usuarioEnStorage;
+}
+
+function estaLogueado(usuario) {
+  if (usuario) {
+    saludar(usuario);
+    mostrarInfoMascota(mascotas);
+    presentarInfo(toggles, "d-none");
+  }
+}
 
 function presentarInfo(array, clase) {
-  array.forEach(element => {
-      element.classList.toggle(clase);
+  array.forEach((element) => {
+    element.classList.toggle(clase);
   });
 }
-btnLogin.addEventListener('click',(e)=>{
+btnLogin.addEventListener("click", (e) => {
   e.preventDefault();
 
-  if(!mailLogin.value || !passLogin.value){
-      //alert (' te faltan algunos campos')
-      Swal.fire(
-        'Paso algo? ',
-        'Nos falta un campo',
-        'question'
-      )
-  }else{
-       let data = validarUsuario(usuarios,mailLogin.value,passLogin.value)   ;
-       if(!data){
-          //alert ('Usuario y/o contraseña Erroneos');
-          Swal.fire({
-            title: 'Error!',
-            text: 'Usuario y/o contraseña Erroneos',
-            icon: 'error',
-            confirmButtonText: 'Reintentar'
-           });
-            
-       }else {
-        if (recordar.checked) {
-          guardarDatos(data, localStorage);
-          saludar(recuperoUsuario(localStorage));
-
+  if (!mailLogin.value || !passLogin.value) {
+    //alert (' te faltan algunos campos')
+    Swal.fire("Paso algo? ", "Nos falta un campo", "question");
+  } else {
+    let data = validarUsuario(usuarios, mailLogin.value, passLogin.value);
+    if (!data) {
+      //alert ('Usuario y/o contraseña Erroneos');
+      Swal.fire({
+        title: "Error!",
+        text: "Usuario y/o contraseña Erroneos",
+        icon: "error",
+        confirmButtonText: "Reintentar",
+      });
+    } else {
+      if (recordar.checked) {
+        guardarDatos(data, localStorage);
+        saludar(recuperoUsuario(localStorage));
       } else {
-          guardarDatos(data, sessionStorage);
-          saludar(recuperoUsuario(sessionStorage))
-         // Swal.fire("Bienvenid@!", "You clicked the button!", "success", );
-         Swal.fire({
-          title: 'Bienvenid@!',
-          icon: 'success',
+        guardarDatos(data, sessionStorage);
+        saludar(recuperoUsuario(sessionStorage));
+        // Swal.fire("Bienvenid@!", "You clicked the button!", "success", );
+        Swal.fire({
+          title: "Bienvenid@!",
+          icon: "success",
           showConfirmButton: false,
-          time: 1000});
+          time: 1000,
+        });
       }
-modal.hide();
+      modal.hide();
 
-mostrarInfoMascota(mascotas);
-presentarInfo(toggles, 'd-none');
-       }
+      mostrarInfoMascota(mascotas);
+      presentarInfo(toggles, "d-none");
+    }
   }
-       
-}); 
+});
 
- btnLogout.addEventListener('click', () => {
+btnLogout.addEventListener("click", () => {
   borradoDatos();
-  presentarInfo(toggles, 'd-none');
+  presentarInfo(toggles, "d-none");
 });
 
 modal.hide();
 
 mostrarInfoMascota(mascotas);
-presentarInfo(toggles, 'd-none');
-   
-function mostrarInfoMascota(array){
-    contTarjetas.innerHTML = '' ;
+presentarInfo(toggles, "d-none");
 
-    array.forEach(element => {
-        let html = `<div class="card cardMascota" id="tarjeta${element.nombre}">
+function mostrarInfoMascota(array) {
+  contTarjetas.innerHTML = "";
+
+  array.forEach((element) => {
+    let html = `<div class="card cardMascota" id="tarjeta${element.nombre}">
                 <h3 class="card-header" id="nombreMascota">${element.nombre}</h3>
                 <img src="${element.img}" alt="${element.nombre}" class=" imgbtn " id="fotoMascota">
                 <div class="card-body">
@@ -343,20 +328,16 @@ function mostrarInfoMascota(array){
                     <p class="card-text" id="pesoMascota">Peso: ${element.peso} kilos</p>
                 </div>
             </div>`;
-        contTarjetas.innerHTML += html;
-    });
-
+    contTarjetas.innerHTML += html;
+  });
 }
-
- 
-
 
 function crearTarjetas(array, contenedor) {
   contenedor.innerHTML = "";
   for (const item of array) {
     let tarjeta = document.createElement("div");
     tarjeta.className = "card1 card my-5 bg-light";
-    tarjeta.id = `${item.id}`
+    tarjeta.id = `${item.id}`;
     tarjeta.innerHTML = `
         <h4 class="card-header">${item.nombre}</h4>
         <img src="${item.imagen}" class="card-img-top imagenProducto" alt="${item.descripcion_corta}">
@@ -366,21 +347,19 @@ function crearTarjetas(array, contenedor) {
         </div>
 
         <div class="card-footer">
-        <button id="boton${item.id}" class="btn btn-primary agregar-carrito"> Agregar al carrito</button>
+        <button id="btnAgregarCarrito${item.id}" class="btn btn-primary agregar-carrito"> Agregar al carrito</button>
         </div>`;
-      
 
-        contenedor.append(tarjeta);
-
-         
-    }
+    tarjeta.querySelector(".agregar-carrito");
+    tarjeta.addEventListener("click", () => agregarCarrito(item.id));
+    contenedor.append(tarjeta);
+  }
 }
 
 function buscar(array, criterio, input) {
-return array.filter((item) => item[criterio].includes(input));
+  return array.filter((item) => item[criterio].includes(input));
 }
 
- 
 crearTarjetas(catalogo, contenedorTarjetas);
 
 let busqueda = document.querySelectorAll(".inputBusqueda");
@@ -394,222 +373,109 @@ busqueda.forEach((input) => {
   input.onblur = () => {
     input.value = "";
   };
-}); 
+});
+
+const agregarCarrito = (boton) => {
+  const tarjeta = document.createElement("div");
+  if (carrito.includes(boton)) {
+    Swal.fire({
+      title: "Ya esta en tu carrito",
+      text: "Segui Comprando o Adopta ",
+      icon: "warning",
+      confirmButtonText: "Comprar :)",
+    });
+  } else {
+    Toastify({
+      text: "Agregado correctamente",
+      duration: 3000,
+      newWindow: true,
+      close: true,
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
+      className: "added",
+      
+      onClick: function () {},
+    }).showToast();
+
+    tarjeta.setAttribute("id", "animal-card");
+    tarjeta.classList.add("card");
+    tarjeta.style.width = "15rem";
+
+    fetch("json/animal.json")
+      .then((response) => response.json())
+      .then((animal) => {
+        
+        var filtrado = animal.find(function (data) {
+          return data.id === boton;
+        });
 
 
-  const buscador = () => {
-  let inputTexto = document.getElementById("inputTexto");
-  inputTexto.addEventListener("change", () => {
-      let buscador = inputTexto.value;
-      fetch('json/aninal.json')
-          .then(response => response.json())
-          .then(animal => {
-              let animalFiltrados = animal.filter((animal) =>
-                  animal.coleccion.includes(buscador.toUpperCase())
-              );
-              divAnimal.innerHTML = "";
-              animalFiltrados.forEach((animal) => {
-                  const divAnimalCard = document.createElement("div");
-                  divAnimalCard.classList.add("card");
-                  divAnimalCard.style.width = "18rem";
-
-                  let {
-                      id,
-                      nombre,
-                      precio,
-                      divisa,
-                      img,
-                      coleccion,
-                      descripcion
-                  } = animal
-
-                  const divAnimalContent = `
+        const divAnimalContent = `
           <div class="card-body">
-          <h5 class="card-title">${nombre}</h5>
-          <img src= "${img}">
-          <p class="card-text">${coleccion}</p>
-          <p class="card-text">${descripcion}</p>
-          <p class="card-text">${precio} ${divisa}</p>
-          <button id="boton${id}" class="btn btn-primary agregar-carrito"> Agregar al carrito</button>
-          </div>
-          `;
+           <img src="${filtrado.imagen}" class="card-img-top imagenProducto" alt="${filtrado.nombre}">
+            <h5 class="card-title">${filtrado.nombre}</h5>
+            <p class="card-text"><i class="fa-brands"></i> ${filtrado.precio}  </p>
+            <a id="eliminar-${filtrado.id}" class="btn-eliminar"><i class="fa-solid fa-trash-can"></i></a>
+           </div>`;
 
-                  divAnimalCard.innerHTML = divAnimalContent;
-                  divAnimalCard
-                      .querySelector(".agregar-carrito")
-                      .addEventListener("click", () => agregarCarrito(animal));
-                  divAnimal.append(divAnimalCard);
-              });
-          })
+
+        tarjeta.innerHTML = divAnimalContent;
+        tarjeta
+          .querySelector(".btn-eliminar")
+          .addEventListener("click", (e) => eliminarAnimalDelCarrito(boton, e));
+        carro.append(tarjeta);
+        carrito = [...carrito, boton];
+      });
+  }
+  if (carrito.length > 0) {
+    let totalCarrito = carrito.reduce(  (acc, ite) => acc + ite,0  );
+    divTotal.textContent = `Total: ${totalCarrito}`;
+  }
+
+  localStorage.setItem("AnimalsAgregados", JSON.stringify(carrito));
+};
+
+const eliminarAnimalDelCarrito = (animal, e) => {
+  let AnimalCard = e.target.closest("#animal-card");
+  for (let c = 0; c < carrito.length; c++) {
+    carrito[c] === animal && carrito.splice(c, 1);
+    localStorage.setItem("AnimalsAgregados", JSON.stringify(carrito));
+    AnimalCard.remove();
+    let totalCarrito = carrito.reduce((acc, ite) => acc + ite.precio, 0);
+
+    divTotal.textContent = `Total: ${totalCarrito}`;
+  }
+
+  console.log(carrito);
+  console.log(carrito.length);
+};
+
+const vaciarCarrito = () => {
+  botonVaciar.addEventListener("click", () => {
+    carro.innerHTML = "";
+    carrito.splice(0, carrito.length);
+    divTotal.textContent = `Total: 0`;
+    localStorage.setItem("AnimalsAgregados", "");
+    console.log(carrito.length);
   });
 };
- 
 
-const pintarConBoton = (boton) => {
-  console.log(pintarConBoton)
-
-  boton.addEventListener('click', () => {
-      fetch('json/animal.json')
-          .then(response => response.json())
-          .then(animal => {
-              let animalFiltrados = animal.filter((animal) =>
-                  animal.includes(boton.value)
-              );
-               divAnimal.innerHTML = "";
-              animalFiltrados.forEach((animal) => {
-
-                  const divAnimalCard = document.createElement("div");
-                  divAnimalCard.classList.add("card");
-                  divAnimalCard.style.width = "18rem";
-
-                  let   {
-                      id,
-                      categoria,
-                      nombre,
-                      codigo,
-                      precio,
-                      imagen,
-                      descripcion
-                  }   = animal
-
-          const divAnimalContent = `
-          <div class="card-body">
-          <h5 class="card-title">${animal.titulo}</h5>
-          <img src= "${img}">
-          <p class="card-text">${coleccion}</p>
-          <p class="card-text">${descripcion}</p>
-          <p class="card-text">${precio} ${divisa}</p>
-          <button id="boton${id}" class="btn btn-primary agregar-carrito"> Agregar al carrito</button>
-          </div>
-          `;
-          
-
-                  divAnimalCard.innerHTML = divAnimalContent;
-                  divAnimalCard
-                      .querySelector(".agregar-carrito")
-                      .addEventListener("click", () => agregarCarrito(animal));
-                  divAnimal.append(divAnimalCard);
-                  
-
-                  document.getElementById("carrito").innerHTML = divAnimalContent;
-
-                  console.log(animalFiltrados)
-              });
-              console.log(animalFiltrados)
-
-          })
-  })
-  console.log(animalFiltrados)
-
-
-} 
-
-const  agregarCarrito = (animal)=> {
-const divAnimalCard = document.createElement("div")
-   if (carrito.includes(animal)) {
-    Swal.fire({
-        title: 'Ya esta en tu carrito!',
-        text: 'Continuar con tu compra',
-        icon: 'warning',
-        confirmButtonText: 'Aceptar'
-    })
-} else {
-    Toastify({
-        text: "Agregado correctamente",
-        duration: 3000,
-        newWindow: true,
-        close: true,
-        gravity: "top",
-        position: "right",
-        stopOnFocus: true,
-        className: "added",
-        style: {
-            background: "linear-gradient(to right, #dcff03, #ede700, #f8ce00, #feb500, #ff9d0a)",
-        },
-        onClick: function () {}
-      }).showToast();
-
-      divAnimalCard.setAttribute("id", "producto-card");
-      divAnimalCard.classList.add("card");
-      divAnimalCard.style.width = "18rem";
- 
-        let {
-          id,
-          nombre,
-          precio,
-          divisa
-      } = animal 
-
-        const divAnimalCardContent = `
-        <div class="card-body">
-                <h5 class="card-title">${nombre}</h5>
-                <p class="card-text"><i class="fa-brands fa-ethereum"></i> ${precio}  </p>
-                <a id="eliminar-${id}" class="btn-eliminar"><i class="fa-solid fa-trash-can"></i></a>
-            </div>`;
-            
-        divAnimalCard.innerHTML = divAnimalCardContent;
-        divAnimalCard
-            .querySelector(".btn-eliminar")
-            .addEventListener("click", (e) => eliminarAnimalDelCarrito(animal, e));
-        carro.append(divAnimalCard);
-        carrito = [...carrito, animal]
+const confirmarCompra = () => {
+  let botonComprar = document.getElementById("confirmar-compra");
+  botonComprar.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (carrito.length == 0) {
+      Swal.fire({
+        title: "Cucha, anda  a elegir que comprar!",
+        icon: "warning",
+        confirmButtonText: "Aceptar",
+      });
+    } else {
+      setTimeout(() => (location.href = " "), 1000);
     }
-  
-  if (carrito.length > 0) {
-  let totalCarrito = carrito.reduce(
-      (acc, ite) => acc + ite.precio,
-      0
-  );
-  divTotal.textContent = `Total: ${totalCarrito}`;
-}
-
-localStorage.setItem("AnimalsAgregados", JSON.stringify(carrito));
-
-}
-
- const eliminarNftDelCarrito = (animal, e) => {
-let AnimalCard = e.target.closest("#Animal-card");
-for (let c = 0; c < carrito.length; c++) {
-  (carrito[c] === animal) &&
-  carrito.splice(c, 1);
-  localStorage.setItem("AnimalsAgregados", JSON.stringify(carrito))
-  AnimalCard.remove();
-  let totalCarrito = carrito.reduce(
-      (acc, ite) => acc + ite.precio,
-      0
-  );
-
-  divTotal.textContent = `Total: ${totalCarrito}`;
-
-}
-console.log(carrito);
-console.log(carrito.length);
+  });
 };
 
- const vaciarCarrito = () => {
-botonVaciar.addEventListener('click', () => {
-  carro.innerHTML = ""
-  carrito.splice(0, carrito.length);
-  divTotal.textContent = `Total: 0`;
-  localStorage.setItem("AnimalsAgregados", "")
-  console.log(carrito.length)
-})
-}
-
- const confirmarCompra = () => {
-let botonComprar = document.getElementById('confirmar-compra')
-botonComprar.addEventListener('click', (e) => {
-  e.preventDefault();
-  if (carrito.length == 0) {
-      Swal.fire({
-          title: 'No hay nada que comprar!',
-          text: 'Vuelve a buscar',
-          icon: 'warning',
-          confirmButtonText: 'Aceptar'
-      })
-  } else {
-      setTimeout(() => location.href = " ", 1000);
-  }
-})
- }
- 
+vaciarCarrito();
+confirmarCompra();

@@ -7,20 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Un sitio para encontrar tu mascota en adopción">
-    <meta name="keywords"content="mascotas, adpocion de mascotas, mascotas en adopcion, animales en adopcion, perritos en adopcion, adopta un perro">
+    <meta name="keywords"
+        content="mascotas, adpocion de mascotas, mascotas en adopcion, animales en adopcion, perritos en adopcion, adopta un perro">
     <link rel="shortcut icon" href="#">
     <title>peps shop</title>
     <link rel="stylesheet" href="./CSS/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="./CSS/style.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
 </head>
 
 <body>
     <header class="bg-dark">
-
-
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
             <div class="container">
                 <a class="navbar-brand" href="#">El Reino Animal</a>
@@ -32,9 +30,7 @@
                 <div class="col-md-5">
                     <input type="text" class="form-control" id="inputNombre">
                 </div>
-
                 <form class="d-flex">
-
                     <button id="btnModalLogin" class="btn btn-outline-primary me-2 toggles" type="button"
                         data-bs-toggle="modal" data-bs-target="#modalLogin">Login</button>
 
@@ -65,7 +61,24 @@
 
     <main class="container">
 
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Mi Carrito</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
 
+            <div class="offcanvas-body " id="carrito"></div>
+
+            <div id="total-carrito" class="total-carrito"></div>
+            <div class="botones">
+
+                <button id="vaciar-carrito" class="vaciar-carrito btncarrito ">Vaciar Carrito</button>
+                <button class="confirmar-compra btncarrito" data-bs-dismiss="offcanvas" aria-label="Close"><a
+                        id="confirmar-compra">Confrimar Compra</a></button>
+            </div>
+        </div>
 
 
         <section id="guest" class="toggles ">
@@ -172,24 +185,7 @@
 
         <section id="logged" class="d-none toggles">
 
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-                aria-labelledby="offcanvasExampleLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Mi Carrito</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-                </div>
-                //ACA SE TIENE QUE METER
-                <div class="offcanvas-body" id="carrito"></div>
 
-                <div id="total-carrito" class="total-carrito"></div>
-                <div class="botones">
-
-                    <button id="vaciar-carrito" class="vaciar-carrito ">Vaciar Carrito</button>
-                    <button class="confirmar-compra" data-bs-dismiss="offcanvas" aria-label="Close"><a
-                            id="confirmar-compra">Confrimar Compra</a></button>
-                </div>
-            </div>
 
             <div class=" ">
 
@@ -239,7 +235,7 @@
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous">  </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
- 
+
 
 
 </body>
