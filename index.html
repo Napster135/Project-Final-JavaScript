@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Un sitio para encontrar tu mascota en adopción">
+    <meta name="keywords"
+        content="mascotas, adpocion de mascotas, mascotas en adopcion, animales en adopcion, perritos en adopcion, adopta un perro">
+    <link rel="shortcut icon" href="#">
+    <title>peps shop</title>
+    <link rel="stylesheet" href="./CSS/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <header class="bg-dark">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">El Reino Animal</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" id="inputNombre">
+                </div>
+                <form class="d-flex">
+                    <button id="btnModalLogin" class="btn btn-outline-primary me-2 toggles" type="button"
+                        data-bs-toggle="modal" data-bs-target="#modalLogin">Login</button>
+
+                    <button id="btnLogout" class="btn btn-outline-secondary d-none toggles"
+                        type="button">Logout</button>
+                    <p id="nombreUsuario" class="d-none toggles"></p>
+
+                </form>
+                <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"><i
+                        class="fa-solid fa-cart-shopping fa-xl boton-carrito"></i></a>
+
+                <div>
+                    <p class="text-light">Bienvenido/a, <span id="nombreUsuario">invitado/a</span></p>
+                </div>
+            </div>
+            </div>
+
+
+        </nav>
+        <nav id="loginBar" class="navbar navbar-light loginBar">
+            <div class="container-fluid">
+
+            </div>
+        </nav>
+
+
+    </header>
+
+    <main class="container">
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Mi Carrito</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body " id="carrito"></div>
+
+            <div id="total-carrito" class="total-carrito"></div>
+            <div class="botones">
+
+                <button id="vaciar-carrito" class="vaciar-carrito btncarrito ">Vaciar Carrito</button>
+                <button class="confirmar-compra btncarrito" data-bs-dismiss="offcanvas" aria-label="Close"><a
+                        id="confirmar-compra">Confrimar Compra</a></button>
+            </div>
+        </div>
+
+
+        <section id="guest" class="toggles ">
+
+
+            <h1>invitado?</h1>
+
+            <p>entonces ---> decime quien Eres :)</p>
+
+
+            <div class=" container11 ">
+
+                <div class="swiper-container mySwiper ">
+
+                    <div class="swiper-wrapper ">
+                        <div class="swiper-slide card">
+                            <img src="./Img/gato-nebelung.jpeg" alt="">
+                            <div class="card-description">
+                                <div class="card-title">
+                                    <h4>NEBELUNG</h4>
+                                </div>
+                                <div class="card-text">
+                                    <p>El elegante gato nebelung destaca por su complexión musculosa pero grácil.</p>
+                                </div>
+                                <div class="card-link">
+                                    <a href="#">Ver más</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="swiper-slide card ">
+                            <img src="./Img/HUSKY-SIBERIANo.webp" alt="">
+                            <div class="card-description">
+                                <div class="card-title">
+                                    <h4>HUSKY SIBERIANO</h4>
+                                </div>
+                                <div class="card-text">
+                                    <p>El Husky Siberiano a simple vista por las similitudes físicas que tiene con los
+                                        lobos.</p>
+                                </div>
+                                <div class="card-link">
+                                    <a href="#">Ver más</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="./Img/Angora-turco.jpeg" alt="">
+                            <div class="card-description">
+                                <div class="card-title">
+                                    <h4>ANGORA TURCO</h4>
+                                </div>
+                                <div class="card-text">
+                                    <p>El angora turco o Ankara como se conoce, es un felino elegante que cautiva a
+                                        muchos con un pelaje largo.
+                                    </p>
+                                </div>
+                                <div class="card-link">
+                                    <a href="#">Ver más</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+
+            <div class="modal " id="modalLogin" tabindex="-1" aria-labelledby="modalLoginLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="modalLoginLabel">Ingresá</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body py-2 px-4">
+                            <input id="emailLogin" class="form-control my-4" type="email"
+                                placeholder="Ingresa tu correo electrónico" required>
+                            <input id="passwordLogin" class="form-control my-4" type="password"
+                                placeholder="Ingresa tu contraseña" required>
+                        </div>
+                        <div class="modal-footer d-block">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="recordarme">
+                                <label class="form-check-label" for="recordarme">
+                                    Recordarme en este equipo
+                                </label>
+                            </div>
+                            <button class="btn btn-outline-primary" id="login" type="submit">Ingresar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </section>
+
+        <section id="logged" class="d-none toggles">
+
+
+
+            <div class=" ">
+
+                <div id="tarjetas" class=" products   "></div>
+
+                <h1>Que estas Buscando? </h1>
+
+                <div class="tienda">
+                    <p class="saludo">
+                    </p>
+                    <div class="busqueda">
+                        <div>
+                            <label for="buscaNombre">Buscar por nombre</label>
+                            <input type="text" name="" class="inputBusqueda busquedabtn" id="nombre">
+                            <label for="buscaCategoria">Buscar por categoría</label>
+                            <input type="text" name="" class="inputBusqueda busquedabtn" id="categoria">
+                        </div>
+
+                    </div>
+
+                    <div class=" ">
+
+
+
+                        <div class="contenedorTarjetas  products"></div>
+
+
+
+
+
+                    </div>
+                </div>
+
+
+        </section>
+    </main>
+
+
+
+
+    <script src="./JS/bootstrap.bundle.min.js"></script>
+    <script src="./JS/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.14/dist/sweetalert2.all.min.js"></script>
+    <script src="https://kit.fontawesome.com/6405feee34.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous">  </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+
+
+</body>
+
+</html>
